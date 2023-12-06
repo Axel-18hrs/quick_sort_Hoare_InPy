@@ -124,6 +124,7 @@ class QuickSort:
         return _list
 
     def measure_time(self, array):
+        # -
         start_time = time.time()
         self.quick_sort(array, 0, len(array) - 1)
         end_time = time.time()
