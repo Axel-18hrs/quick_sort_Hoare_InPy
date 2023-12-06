@@ -1,5 +1,6 @@
 import random
-
+import random
+import time
 
 class QuickSort:
     def __init__(self):
@@ -30,20 +31,20 @@ class QuickSort:
 
             if self._Option == 1:
                 print("Initial Pivot")
-                self.print_array(self._ArrayOne)
+                self.measure_time(self._ArrayOne)
                 input()
             elif self._Option == 2:
                 print("Middle Pivot")
-                self.print_array(self._ArrayTwo)
+                self.measure_time(self._ArrayTwo)
                 input()
             elif self._Option == 3:
                 print("Final Pivot")
-                self.print_array(self._ArrayThree)
+                self.measure_time(self._ArrayThree)
                 input()
             elif self._Option == 4:
                 self._Option = self._Random.randint(0, 10000)
                 print("Random Generator")
-                self.print_array(self.generate_vector(0, self._Random.randint(0, 100), 10))
+                self.measure_time(self.generate_vector(0, self._Random.randint(0, 100), 10))
                 input()
 
     def partition(self, array, first_index, last_index):
@@ -121,3 +122,20 @@ class QuickSort:
     def generate_vector(self, minon, length, val=5):
         _list = random.sample(range(minon, length), min(val, length - minon))
         return _list
+
+    def measure_time(self, array):
+        start_time = time.time()
+        self.quick_sort(array, 0, len(array) - 1)
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print("\nResult: [ " + ", ".join(map(str, array)) + " ]")
+        print("Swaps: " + str(self._ContainExchange) + "\nPartitions: " + str(self._ContainPartition) +
+              "\nRecursions: " + str(self._ContainRecursive))
+        print(f"Elapsed Time: {elapsed_time:.6f} seconds")
+        self._ContainExchange = 0
+        self._ContainPartition = 0
+        self._ContainRecursive = 0
+
+# Uso del algoritmo
+quick_sort_instance = QuickSort()
+quick_sort_instance.main()
